@@ -15,6 +15,6 @@
     "icon.png"
   ],
   "background" : {
-    "scripts" : ["popup.js"]
+    "scripts" : ["notification.js"]
   }
 }

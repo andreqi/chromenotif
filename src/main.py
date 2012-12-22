@@ -36,13 +36,18 @@ class MainHandler(webapp2.RequestHandler):
     def get(self):
         f = urllib2.urlopen('http://www.rojadirecta.me/')
         resultado = self.obtenerJson(f.read())
+
         self.response.write( resultado )
 
     def obtenerJson (self,data):
         soup = BeautifulSoup.BeautifulSoup(data) 
         prueba = soup.find("div", {"id": "agendadiv"})
         result = form % {"valor": prueba}
-        return result
+        #cadena={"c": 3, "e": 2, "a": 1}
+        cadena = [ { "tipo" : "Basquet" , "hora" : "4:00" , "team1" : "Peru" , "team2" : "Chile"} , { "tipo" : "Futbol" , "hora" : "8:00" , "team1" : "Argentina" , "team2" : "Brasil"},
+                 { "tipo" : "Golf" , "hora" : "7:00" , "team1" : "Ecuador" , "team2" : "EEUU"}]
+        #cadena = [ {"a":0,"b":1},{"a":3,"b":4},{"a":5,"b":6} ]
+        return json.dumps(cadena)
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler)
